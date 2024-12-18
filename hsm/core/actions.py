@@ -7,8 +7,8 @@ from typing import Any, Dict, Generator
 
 from hsm.core.errors import ActionExecutionError
 from hsm.interfaces.abc import AbstractAction
+from hsm.interfaces.async_abc import AsyncAction
 from hsm.interfaces.protocols import Event
-from hsm.runtime.async_support import AsyncAction
 
 
 class BasicAction(AbstractAction):

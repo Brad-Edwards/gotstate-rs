@@ -22,8 +22,8 @@ from typing import (
 )
 
 from hsm.core.errors import HSMError
-from hsm.core.state_machine import StateMachine
 from hsm.interfaces.abc import AbstractAction, AbstractEvent, AbstractGuard, AbstractState, AbstractTransition
+from hsm.interfaces.async_abc import AsyncAction, AsyncGuard
 from hsm.interfaces.protocols import Event
 from hsm.interfaces.types import EventID, StateID
 from hsm.runtime.event_queue import AsyncEventQueue, EventQueueError
@@ -108,20 +108,6 @@ class AsyncTransitionError(AsyncHSMError):
         self.target_id = target_id
         self.event = event
         self.details = details or {}
-
-
-@runtime_checkable
-class AsyncGuard(Protocol):
-    """Protocol for async guard conditions."""
-
-    async def check(self, event: Event, state_data: Any) -> bool: ...
-
-
-@runtime_checkable
-class AsyncAction(Protocol):
-    """Protocol for async actions."""
-
-    async def execute(self, event: Event, state_data: Any) -> None: ...
 
 
 class AsyncState(AsyncHSMBase, AbstractState):
